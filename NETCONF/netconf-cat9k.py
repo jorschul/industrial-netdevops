@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # NETCONF getting started
-# Flo Pachinger / flopach, Cisco Systems, Dec 2019
+# Joerg Schultz / jorschul, Cisco Systems, July 2020
 # Apache License 2.0
 #
 from ncclient import manager
@@ -11,10 +11,14 @@ import lxml.etree as ET
 
 #Input here the connection parameters for the IOS XE device
 #Do not forget to enable NETCONF: device(config)#netconf-yang
-m = manager.connect(host="10.10.20.48",
+
+# berlab-c9300  = 10.49.232.51
+# homelab-c9300 = 192.168.178.111
+
+m = manager.connect(host="10.49.232.51",
                     port=830,
-                    username="developer",
-                    password="C1sco12345",
+                    username="cisco",
+                    password="cisco",
                     hostkey_verify=False)
 
 print("Connected.")
@@ -78,6 +82,66 @@ def change_interface(user_selection):
   netconf_reply = m.edit_config(target='running', config=config)
   print("Did it work? {}".format(netconf_reply.ok))
 
+# disable POE on switch
+# for 0 --> disable add => <inline><never-choice/></inline>
+# for 1 --> enable add => <inline><auto/></inline>
+
+def poe_disable(user_selection):
+  int_status = user_selection
+
+  config = '''
+    <config>  
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <interface>
+          <GigabitEthernet>
+            <name>1/0/3</name>
+              <power xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-power">  
+                <inline><never-choice/></inline>
+              </power>
+          </GigabitEthernet>
+        </interface>
+      </native>
+    </config>
+      '''
+  config_dict = xmltodict.parse(config)
+
+  if int_status == int(1):
+      config_dict["config"]["native"]["interface"]["name"]["power"]["inline"] = "auto"
+      config = xmltodict.unparse(config_dict)
+ 
+  netconf_reply = m.edit_config(target='running', config=config)
+  print("Did it work? {}".format(netconf_reply.ok))
+
+# enable POE on switch
+# for 0 --> disable add => <inline><never-choice/></inline>
+# for 1 --> enable add => <inline><auto/></inline>
+
+def poe_enable(user_selection):
+  int_status = user_selection
+
+  config = '''
+    <config>  
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <interface>
+          <GigabitEthernet>
+            <name>1/0/3</name>
+              <power xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-power">  
+                <inline><auto/></inline>
+              </power>
+          </GigabitEthernet>
+        </interface>
+      </native>
+    </config>
+      '''
+  config_dict = xmltodict.parse(config)
+
+  if int_status == int(1):
+      config_dict["config"]["native"]["interface"]["name"]["power"]["inline"] = "auto"
+      config = xmltodict.unparse(config_dict)
+ 
+  netconf_reply = m.edit_config(target='running', config=config)
+  print("Did it work? {}".format(netconf_reply.ok))
+
 # copy run start
 def save_running_config():
     rpc_body = '''<cisco-ia:save-config xmlns:cisco-ia="http://cisco.com/yang/cisco-ia"/>'''
@@ -86,18 +150,34 @@ def save_running_config():
 
 if __name__ == "__main__":
     while True:
-        print("""Welcome to NETCONF on IOS XE devices! Here are your options
-              0: Quit
+        print("""
+
+
+#    ____          ____           ____         _  _            _   ____               _  _            #
+#   |  _ \  ___   / ___|         |  _ \  ___  | |(_) ____ ___ (_) | __ )   ___  _ __ | |(_) _ __      #
+#   | |_) |/ _ \ | |      _____  | |_) |/ _ \ | || ||_  // _ \| | |  _ \  / _ \| '__|| || || '_ \     #
+#   |  __/| (_) || |___  |_____| |  __/| (_) || || | / /|  __/| | | |_) ||  __/| |   | || || | | |    #
+#   |_|    \___/  \____|         |_|    \___/ |_||_|/___|\___||_| |____/  \___||_|   |_||_||_| |_|    #
+#                                                                                                     #
+
+ 
+
+          POC Polizei Berlin - NETCONF/YANG on IOS XE devices! 
+          Here are your options
+
+              q: Quit
               1: Get running config
               2: Get hostname and IOS version (whole config)
               3: Get hostname and IOS version (filter used)
               4: Get all the YANG models from the device
-              5: Enable GigabitEthernet3
-              6: Disable GigabitEthernet3
-              7: Save the running-configuration
+              5: Disable POE on GigabitEthernet1/0/3
+              6: Enable POE on GigabitEthernet1/0/3
+              7: Set PXE boot variables (in progress)
+              8: Unset PXE boot variables (in progress)
+              9: Save the running-configuration
               """)
         var = input("Enter: ")
-        if var == "0":
+        if var == "q":
             exit()
         elif var == "1":
             get_running_config()
@@ -108,10 +188,14 @@ if __name__ == "__main__":
         elif var == "4":
             get_capabilities()
         elif var == "5":
-            change_interface(1)
+            poe_disable(0)
         elif var == "6":
-            change_interface(0)
+            poe_enable(0)
         elif var == "7":
+            change_interface(1)
+        elif var == "8":
+            change_interface(0)
+        elif var == "9":
             save_running_config()
         else:
             print("Wrong input")

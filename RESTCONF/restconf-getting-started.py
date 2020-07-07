@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # RESTCONF getting started
-# Flo Pachinger / flopach, Cisco Systems, Dec 2019
+# Joerg Schultz / jorschul, Cisco Systems, July 2020
 # Apache License 2.0
 #
 import requests
@@ -9,10 +9,10 @@ import json
 
 #Input here the connection parameters for the IOS XE device
 #Do not forget to enable RESTCONF: device(config)#restconf
-host = '10.10.20.48'
+host = '10.49.232.51'
 port = 443
-username = 'developer'
-password = 'C1sco12345'
+username = 'cisco'
+password = 'cisco'
 
 
 # get the running config in XML of the device

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Get all interfaces NETCONF
-# Flo Pachinger / flopach, Cisco Systems, Dec 2019
+# Joerg Schultz / jorschul, Cisco Systems, July 2020
 # Apache License 2.0
 #
 from ncclient import manager
@@ -9,7 +9,7 @@ import xmltodict
 import xml.dom.minidom
 
 #Input here the connection parameters for the IOS XE device
-#Do not forget to enable RESTCONF: device(config)#netconf-yang
+#Do not forget to enable NETCONF: device(config)#netconf-yang
 m = manager.connect(host="<ip of the device>",
                     port=830,
                     username="",

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # NETCONF Webex Bot
-# Flo Pachinger / flopach, Cisco Systems, Dec 2019
+# Joerg Schultz / jorschul, Cisco Systems, July 2020
 # Apache License 2.0
 #
 from webexteamsbot import TeamsBot
@@ -10,12 +10,12 @@ from ncclient import manager
 import xmltodict
 
 # Retrieve required details from environment variables
-bot_email = "xxx@webex.bot"
-bot_token = ""
-bot_url = "" #try with ngrok.io
-bot_app_name = ""
+bot_email = "poliber@webex.bot"
+bot_token = "NDI1M2VkM2UtNjE0MC00MTcwLTk4NzEtNDg2ZDI1MzIzMjA5MWMyMDYwYTItYTA0_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f"
+bot_url = "https://021b6b0f6b41.ngrok.io" #try with ngrok.io
+bot_app_name = "poc-poliber"
 
-m = manager.connect(host="", port=830, username="", password="", hostkey_verify=False)
+m = manager.connect(host="10.49.232.51", port=830, username="cisco", password="cisco", hostkey_verify=False)
 
 # Create a Bot Object
 bot = TeamsBot(
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     bot.add_command("/getallinterfaces", "Get information from all interfaces", getallinterfaces)
     bot.add_command("/changeint4", "disable or enable Interface 4: e.g. /changeint4 disable", change_interface4)
     bot.remove_command("/echo")
-    bot.set_help_message("Welcome to the IoT Config Bot! You can use the following commands:\n")
+    bot.set_help_message("Welcome to the PoC Polizei Berlin Bot! You can use the following commands:\n")
 
     # Run Bot
     bot.run(host="0.0.0.0", port=5000)

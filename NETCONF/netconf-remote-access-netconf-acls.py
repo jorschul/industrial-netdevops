@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Remote Access with NETCONF + ACLs
-# Flo Pachinger / flopach, Cisco Systems, May 2020
+# Joerg Schultz / jorschul, Cisco Systems, July 2020
 # Apache License 2.0
 #
 from ncclient import manager

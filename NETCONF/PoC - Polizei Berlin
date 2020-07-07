@@ -1,0 +1,39 @@
+PoC - Polizei Berlin 
+
+Webex Bot for Network Device config 
+
+
+
+NDI1M2VkM2UtNjE0MC00MTcwLTk4NzEtNDg2ZDI1MzIzMjA5MWMyMDYwYTItYTA0_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f
+
+
+
+Webhook data
+{
+  "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMDRlZjU5ZDItMGZiOS00YjM0LTkwNjktMWFiZGE0MDJjYzZh",
+  "name": "pocpoliber",
+  "targetUrl": "https://021b6b0f6b41.ngrok.io",
+  "resource": "messages",
+  "event": "created",
+  "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xZWI2NWZkZi05NjQzLTQxN2YtOTk3NC1hZDcyY2FlMGUxMGY",
+  "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83ZDE4YjFhOC1iNzg2LTRiZWUtYThiMS02Mjc0ODY0MmM2Mzk",
+  "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmMzkyNWU5NDFmMzhhYTc0M2Y0MmFiNzcwZmZhZjFhNTIyMjcxZDI5OTQ4NDhjNjk2YWMwYTEwN2Q2YTg5MjI3",
+  "ownedBy": "creator",
+  "status": "active",
+  "created": "2020-07-06T22:12:14.628Z"
+}
+
+
+{
+  "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svNzJjNmM3NTQtMTU4Yi00Nzk0LWJhYWEtZGQzYWIzNmIyYTA3",
+  "name": "pocpoliber",
+  "targetUrl": "https://021b6b0f6b41.ngrok.io",
+  "resource": "memberships",
+  "event": "created",
+  "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xZWI2NWZkZi05NjQzLTQxN2YtOTk3NC1hZDcyY2FlMGUxMGY",
+  "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83ZDE4YjFhOC1iNzg2LTRiZWUtYThiMS02Mjc0ODY0MmM2Mzk",
+  "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmMzkyNWU5NDFmMzhhYTc0M2Y0MmFiNzcwZmZhZjFhNTIyMjcxZDI5OTQ4NDhjNjk2YWMwYTEwN2Q2YTg5MjI3",
+  "ownedBy": "creator",
+  "status": "active",
+  "created": "2020-07-06T22:13:43.997Z"
+}
